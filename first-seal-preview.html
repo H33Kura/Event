@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#181414">
+  <meta name="description" content="Четыре печати Рассвета. Древнее послание ожидает своего адресата.">
+  <title>Четыре печати Рассвета · Орден Рассвета</title>
+  <style>
+    :root {
+      --bg:#161315; --bg2:#251a1b; --gold:#d5b17a; --gold-light:#ffdf9a;
+      --cream:#f4e5ca; --text:#e7d5b8; --muted:#bca78b;
+      --ease:cubic-bezier(.22,.68,.19,1);
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{min-height:100%;scroll-behavior:smooth}
+    body{min-height:100vh;min-height:100dvh;margin:0;color:var(--text);font-family:Georgia,'Times New Roman',serif;overflow-x:hidden;background:radial-gradient(ellipse 72% 55% at 50% 6%,#4b322d 0%,transparent 77%),radial-gradient(ellipse 65% 55% at 0 98%,#2d2725 0%,transparent 80%),linear-gradient(160deg,#171316,#26191c 65%,#171416)}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.52;background:radial-gradient(ellipse at center,transparent 24%,#070707 100%)}
+    button,input{font:inherit}
+    button:focus-visible,input:focus-visible{outline:2px solid #f6d6a1;outline-offset:4px}
+    button{touch-action:manipulation}
+    .dust{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+    .dust span{position:absolute;width:2px;height:2px;background:#f9dda5;border-radius:50%;opacity:.35;box-shadow:0 0 10px #f9dda5;animation:drift 8s ease-in-out infinite alternate}
+    .dust span:nth-child(1){left:12%;top:16%;animation-delay:-2s}.dust span:nth-child(2){left:75%;top:7%;animation-delay:-4s}.dust span:nth-child(3){left:89%;top:34%;animation-delay:-5s}.dust span:nth-child(4){left:15%;top:75%;animation-delay:-7s}.dust span:nth-child(5){left:61%;top:67%;animation-delay:-1s}.dust span:nth-child(6){left:47%;top:89%;animation-delay:-3s}
+    @keyframes drift{to{transform:translate(13px,-16px);opacity:.1}}
+    .app{width:min(1100px,100%);padding:30px clamp(16px,4vw,45px) 52px;margin:0 auto;position:relative;z-index:1}
+    .masthead{display:flex;justify-content:space-between;align-items:center;gap:14px;font:600 10px/1.6 Arial,Helvetica,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#c3a37d;opacity:.94}
+    .masthead-left{display:flex;gap:10px;align-items:center}.masthead-left .small-sun{font-size:23px;color:#edcb89;text-shadow:0 0 14px #bf8a4e}
+    .masthead-right{border:1px solid rgba(202,158,103,.39);border-radius:2px;padding:8px 11px;white-space:nowrap;letter-spacing:.14em}
+    .pagehead{text-align:center;max-width:800px;margin:37px auto 30px}
+    .pagehead .eyebrow{font:600 10px/1.5 Arial,Helvetica,sans-serif;letter-spacing:.37em;color:#d9b77a;text-transform:uppercase}
+    .ornament{display:flex;align-items:center;justify-content:center;gap:12px;color:#d6b077;margin:15px auto 16px}
+    .ornament::before,.ornament::after{content:"";height:1px;width:74px;background:linear-gradient(90deg,transparent,#ae875e)}
+    .ornament::after{transform:rotate(180deg)}
+    h1{font-weight:400;font-size:clamp(38px,6.8vw,68px);line-height:1.11;letter-spacing:-.045em;font-style:italic;color:#f4e3c5;margin:0;text-shadow:0 5px 40px #0b0708}
+    .lead{margin:17px auto 0;font-size:clamp(15px,2.5vw,18px);line-height:1.75;color:#d8c1a8;max-width:680px}
+    .status{margin:24px auto 31px;max-width:700px}
+    .status-line{display:flex;justify-content:space-between;align-items:center;gap:15px;font:600 11px/1.6 Arial,Helvetica,sans-serif;letter-spacing:.14em;color:#d8ba90;text-transform:uppercase;margin-bottom:10px}
+    .status-line strong{font:600 17px/1 Georgia,serif;color:#ffe1a9}
+    .track{height:9px;border-radius:99px;background:rgba(14,9,11,.7);box-shadow:inset 0 0 0 1px rgba(200,163,104,.29);overflow:hidden;padding:2px}
+    .bar{height:5px;width:0%;background:linear-gradient(90deg,#9c6b3c,#f5d28a,#fff0b8);border-radius:99px;box-shadow:0 0 13px #efb868;transition:width 1.8s var(--ease)}
+    .seals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:700px;margin:20px auto 0}
+    .seal-item{border:1px solid rgba(192,149,90,.3);padding:10px 7px 11px;display:flex;gap:6px;align-items:center;flex-direction:column;background:rgba(20,15,17,.36);min-width:0;transition:background .7s,border-color .7s}
+    .seal-item .sigil{width:30px;height:30px;border:1px solid #715842;border-radius:50%;display:grid;place-items:center;font-size:17px;color:#806c59}
+    .seal-item .date{font:10px/1.3 Arial,Helvetica,sans-serif;color:#a9947f;letter-spacing:.03em}
+    .seal-item .seal-title{font:600 9px/1.2 Arial,Helvetica,sans-serif;color:#bfa58c;letter-spacing:.09em;text-align:center;text-transform:uppercase}
+    .seal-item.active{border-color:#bc935c;background:rgba(98,66,42,.18)}
+    .seal-item.active .sigil{color:#f0c47c;border-color:#d6af77;box-shadow:0 0 14px rgba(216,167,91,.24)}
+    .seal-item.completed{border-color:#e4b76d;background:rgba(132,82,30,.23)}
+    .seal-item.completed .sigil{background:#b57f42;color:#26171a;border-color:#d2a36d;box-shadow:0 0 20px rgba(240,181,80,.3)}
+    .layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(18px,3vw,30px);align-items:stretch}
+    .panel{position:relative;min-width:0;border:1px solid rgba(205,164,110,.40);background:linear-gradient(154deg,rgba(69,47,45,.92),rgba(32,24,27,.95) 60%,rgba(28,23,25,.98));box-shadow:0 20px 60px rgba(0,0,0,.27),inset 0 0 0 4px rgba(10,9,10,.15);padding:clamp(22px,3.3vw,38px)}
+    .panel::before,.panel::after{content:"✦";position:absolute;color:#b78e5b;font-size:13px;pointer-events:none}.panel::before{left:11px;top:10px}.panel::after{right:11px;bottom:10px}
+    .panel-id{font:600 10px/1.5 Arial,Helvetica,sans-serif;color:#dfb87a;letter-spacing:.25em;text-transform:uppercase}
+    h2{font-weight:400;font-style:italic;font-size:clamp(28px,3.6vw,40px);line-height:1.16;margin:10px 0 17px;color:#f4e3cb}
+    .prose{font-size:clamp(15px,1.8vw,17px);line-height:1.77;color:#e1cbb2;margin:0}
+    .altar{height:212px;display:grid;place-items:center;position:relative;margin:7px auto 17px;isolation:isolate}
+    .altar .halo{position:absolute;width:204px;height:204px;border-radius:50%;border:1px solid rgba(215,169,105,.26);box-shadow:0 0 0 11px rgba(186,129,76,.028),0 0 0 27px rgba(174,123,81,.033),inset 0 0 29px rgba(3,2,2,.5);background:radial-gradient(circle,rgba(166,104,52,.13),transparent 68%);animation:turn 75s linear infinite}
+    .altar .halo::after{content:"";position:absolute;inset:17px;border-radius:50%;border:1px dashed rgba(219,182,114,.23)}
+    .altar .rays{position:absolute;width:174px;height:174px;background:repeating-conic-gradient(from 6deg,rgba(209,152,77,.47) 0deg 2deg,transparent 2deg 30deg);clip-path:circle(49%);opacity:.44;animation:turn 80s linear infinite reverse;transition:opacity 1s,filter 1s}
+    .altar .core{position:absolute;width:89px;height:89px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 36% 25%,#9d734e,#5c3e31 64%,#291f23);box-shadow:0 0 20px rgba(248,172,65,.12),inset 0 0 0 2px rgba(228,180,100,.38),inset 0 0 0 9px rgba(49,28,29,.45);transition:box-shadow 1.3s,background 1.3s,transform 1.3s}
+    .core svg{width:55px;height:55px;color:#e2b577;filter:drop-shadow(0 0 6px rgba(233,174,91,.25))}
+    .altar.bright .rays{opacity:1;filter:drop-shadow(0 0 13px #f7c981)}
+    .altar.bright .core{transform:scale(1.07);background:radial-gradient(circle at 31% 25%,#fce8ab,#e8b967 52%,#8e592d);box-shadow:0 0 30px rgba(255,218,136,.55),0 0 100px rgba(249,183,86,.33),inset 0 0 0 2px #ffde96}
+    .altar.bright .core svg{color:#775028}
+    @keyframes turn{to{transform:rotate(360deg)}}
+    .cipher{margin:24px auto 16px;max-width:370px;text-align:center;padding:22px 12px;background:linear-gradient(140deg,#e9d5b5,#c4a57e);border:1px solid #e9cb96;outline:5px solid rgba(211,178,130,.1);box-shadow:0 8px 28px rgba(0,0,0,.25);color:#513d2b}
+    .cipher .cipher-caption{font:600 10px/1.4 Arial,Helvetica,sans-serif;letter-spacing:.23em;color:#795f47;text-transform:uppercase}
+    .cipher .glyphs{font-size:clamp(40px,7vw,64px);letter-spacing:.13em;margin:7px 0 6px;font-weight:400;color:#4e302b}
+    .cipher .cipher-foot{font-size:12px;font-style:italic;color:#755944}
+    .clue{max-width:460px;text-align:center;margin:18px auto 0;font-size:15px;font-style:italic;line-height:1.8;color:#d4bd9d}
+    .clue strong{color:#f2d39d;font-weight:normal}
+    .form{margin-top:25px}
+    label{display:block;margin-bottom:10px;color:#dbc298;font:600 10px/1.4 Arial,Helvetica,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+    .answer-row{display:flex;gap:9px}
+    input{width:100%;min-width:0;height:50px;padding:12px 15px;border:1px solid #90724f;background:#1b1819;border-radius:3px;color:#ffe9c1;font:22px/1 Georgia,serif;letter-spacing:.12em;text-transform:uppercase;transition:border-color .2s}
+    input::placeholder{font:italic 16px/1 Georgia,serif;color:#856f61;letter-spacing:0;text-transform:none}
+    input:focus{border-color:#dec18d;outline:none;box-shadow:0 0 0 2px rgba(213,177,122,.22)}
+    .btn{min-height:48px;padding:12px 19px;border-radius:3px;border:1px solid #ccaa75;color:#291a19;background:linear-gradient(145deg,#ffe2a5,#cda16b);font:600 11px/1.4 Arial,Helvetica,sans-serif;letter-spacing:.095em;cursor:pointer;text-transform:uppercase;transition:transform .2s,filter .2s,box-shadow .2s}
+    .btn:hover{filter:brightness(1.07);transform:translateY(-1px);box-shadow:0 6px 22px rgba(235,170,81,.23)}.btn:active{transform:none}
+    .secondary{background:transparent;color:#e1c299;border-color:#94744f}
+    .secondary:hover{background:rgba(209,154,85,.10)}
+    .hints{margin-top:14px;display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+    .link-button{border:0;background:none;padding:9px 0;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#9e7c57;color:#dec296;font:italic 14px/1.5 Georgia,serif;cursor:pointer}
+    .hint-text{margin:10px 0 0;padding:14px 15px;background:rgba(233,191,122,.08);border-left:2px solid #b68e5a;line-height:1.65;font-size:14px;color:#ead3b0;animation:rise .4s ease both}
+    .feedback{font-size:14px;line-height:1.6;margin:10px 0 0;color:#e6c58c;min-height:24px}
+    .result{display:none;text-align:center;animation:rise .85s var(--ease) both}
+    .result.visible{display:block}
+    .result h3{font:italic 31px/1.25 Georgia,serif;color:#ffe4ad;margin:7px 0 14px}
+    .result p{line-height:1.75;font-size:16px;color:#e6d2b5}
+    .key{margin:18px auto;padding:13px 25px;border:1px solid #dbb477;display:inline-block;color:#ffdf9d;letter-spacing:.22em;font-size:24px;box-shadow:inset 0 0 18px rgba(222,158,68,.14),0 0 22px rgba(212,148,58,.12)}
+    .scripture{background:linear-gradient(160deg,#ebdabe,#d6b991);color:#594534;border:1px solid #dcc196;padding:24px clamp(15px,3vw,28px) 27px;min-height:340px;box-shadow:inset 0 0 0 3px rgba(116,81,48,.10),0 14px 26px rgba(0,0,0,.15);margin:12px 0 0;position:relative}
+    .scripture::before{content:"☼";font-size:31px;color:#a47b4b;display:block;text-align:center;margin-bottom:11px}
+    .scripture h3{margin:0 0 18px;font-weight:400;font-style:italic;font-size:25px;text-align:center}
+    .verse{margin:16px 0;font-size:clamp(15px,1.7vw,17px);line-height:1.75;text-align:center;min-height:35px;display:flex;align-items:center;justify-content:center}
+    .verse.locked{color:#8a755f;opacity:.55;letter-spacing:.11em;font-family:Georgia,serif}
+    .verse.revealed{color:#5d3f30;animation:ink 1.3s ease both}
+    @keyframes ink{from{filter:blur(7px);opacity:0}to{filter:blur(0);opacity:1}}
+    .scripture-bottom{text-align:center;font:italic 13px/1.6 Georgia,serif;color:#806b55;margin-top:24px}
+    .next{border-top:1px solid rgba(204,158,100,.27);margin-top:30px;padding-top:23px;text-align:center}
+    .next strong{display:block;font-weight:normal;color:#ead4ac;font-size:18px;font-style:italic}
+    .next span{display:block;margin-top:10px;color:#bda58a;font-size:14px;line-height:1.7}
+    .footer{text-align:center;margin:32px auto 0;color:#a68d73;font:italic 13px/1.7 Georgia,serif}
+    .footer .line{width:60px;height:1px;background:#987349;margin:0 auto 17px}
+    .flash{position:fixed;inset:0;z-index:20;pointer-events:none;opacity:0;background:radial-gradient(circle at center,rgba(255,241,177,.86),rgba(236,188,104,.25) 35%,transparent 75%)}
+    .flash.play{animation:flare 1.65s ease-out both}
+    @keyframes flare{0%,100%{opacity:0}24%{opacity:.84}55%{opacity:.22}}
+    @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .hidden{display:none!important}
+    @media(max-width:790px){.layout{grid-template-columns:1fr;max-width:620px;margin:0 auto}.pagehead{margin-top:25px}.status{margin-bottom:25px}.panel{padding:25px 22px}.altar{height:180px}.altar .halo{width:170px;height:170px}.altar .rays{width:143px;height:143px}.altar .core{width:76px;height:76px}.altar .core svg{width:45px;height:45px}}
+    @media(max-width:420px){.app{padding:18px 12px 36px}.masthead{font-size:9px;letter-spacing:.09em}.masthead-right{padding:6px 7px}.pagehead{margin-top:27px}.seals{gap:5px}.seal-item{padding:9px 3px}.seal-item .seal-title{font-size:8px}.seal-item .sigil{width:25px;height:25px}.seal-item .date{font-size:9px}.panel{padding:21px 16px}.answer-row{flex-direction:column}.answer-row .btn{width:100%}.cipher .glyphs{font-size:46px}.scripture{min-height:320px}.pagehead .eyebrow{letter-spacing:.23em}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <div class="dust" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="flash" id="flash" aria-hidden="true"></div>
+  <main class="app">
+    <header class="masthead">
+      <div class="masthead-left"><span class="small-sun" aria-hidden="true">☼</span><span>ОРДЕН РАССВЕТА</span></div>
+      <span class="masthead-right">СВИТОК 014 · АЛИСА</span>
+    </header>
+    <div class="pagehead">
+      <div class="eyebrow">Из утраченных летописей</div>
+      <div class="ornament" aria-hidden="true">✦</div>
+      <h1>Четыре печати<br>Рассвета</h1>
+      <p class="lead">Древнее послание веками ожидало своего адресата. Четыре печати удерживают его слова во мраке. Лишь избранная способна вернуть им свет.</p>
+    </div>
+    <div class="status" aria-label="Ход восстановления послания">
+      <div class="status-line"><span>Восстановление манускрипта</span><strong id="progressLabel" aria-live="polite">0%</strong></div>
+      <div class="track" role="progressbar" aria-label="Восстановление" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack"><div class="bar" id="progressBar"></div></div>
+      <div class="seals">
+        <div class="seal-item active" id="seal1"><span class="sigil">Ⅰ</span><span class="seal-title">Знание</span><span class="date">11 октября</span></div>
+        <div class="seal-item" id="seal2"><span class="sigil">Ⅱ</span><span class="seal-title">Мудрость</span><span class="date">12 октября</span></div>
+        <div class="seal-item" id="seal3"><span class="sigil">Ⅲ</span><span class="seal-title">Память</span><span class="date">13 октября</span></div>
+        <div class="seal-item" id="seal4"><span class="sigil">Ⅳ</span><span class="seal-title">Рассвет</span><span class="date">14 октября, 00:00</span></div>
+      </div>
+    </div>
+    <div class="layout">
+      <section class="panel" aria-label="Первое испытание">
+        <div class="panel-id">Испытание первое · 11 октября</div>
+        <h2>Печать Знания</h2>
+        <p class="prose">На обороте древнего свитка сохранилось лишь одно слово. Оно отражено во тьме и скрыто сдвигом письмен. Верните его истинное звучание, и первая печать падёт.</p>
+        <div class="altar" id="altar" aria-hidden="true">
+          <div class="halo"></div><div class="rays"></div>
+          <div class="core">
+            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="12" stroke="currentColor" stroke-width="2"/><circle cx="30" cy="30" r="18" stroke="currentColor" stroke-width=".9" stroke-dasharray="2 5"/><path d="M30 3v9M30 48v9M3 30h9M48 30h9M11 11l7 7M42 42l7 7M49 11l-7 7M18 42l-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div id="challenge">
+          <div class="cipher" role="img" aria-label="Зашифрованная надпись: Б О К Б У">
+            <div class="cipher-caption">Надпись на свитке</div>
+            <div class="glyphs">БОКБУ</div>
+            <div class="cipher-foot">Уцелевшие письмена первой печати</div>
+          </div>
+          <p class="clue">«<strong>Ночь отражает начертанное.</strong><br><strong>Солнце возвращает буквы на шаг к истоку.</strong>»</p>
+          <form class="form" id="answerForm">
+            <label for="answer">Истинное слово</label>
+            <div class="answer-row"><input id="answer" name="answer" type="text" placeholder="Напиши разгадку" spellcheck="false" autocomplete="off" autocapitalize="characters" maxlength="20" aria-describedby="feedback"><button class="btn" type="submit">Снять печать ✦</button></div>
+            <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+          </form>
+          <div class="hints"><button class="link-button" id="hintBtn" type="button">Попросить подсказку у хранителя</button></div>
+          <div class="hint-text hidden" id="hintText" aria-live="polite"></div>
+        </div>
+        <div class="result" id="result" aria-live="polite">
+          <h3>Первая печать снята.</h3>
+          <p>Древние письмена отозвались на Ваш голос. Отныне первое слово принадлежит Вам.</p>
+          <div class="key" aria-label="Первый ключ: ТАЙНА">ТАЙНА</div>
+          <p>Сохраните его в памяти. Когда придёт последний час, все четыре ключа понадобятся вновь.</p>
+        </div>
+      </section>
+      <section class="panel" aria-label="Восстанавливаемое пророчество">
+        <div class="panel-id">Священный архив · Фрагмент 01 / 04</div>
+        <h2>Утраченное пророчество</h2>
+        <p class="prose">Снятая печать возвращает одну строку манускрипта. Остальные дремлют до своего часа.</p>
+        <div class="scripture">
+          <h3>Слова, сокрытые светом</h3>
+          <p class="verse locked" id="verse1">▓▓▓▓ ▓▓▓▓▓▓▓ ▓▓▓▓▓▓ ▓▓▓▓▓▓▓ ▓▓▓▓▓</p>
+          <p class="verse locked">▓▓▓▓▓ ▓▓▓▓▓▓ ▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓</p>
+          <p class="verse locked">▓▓▓▓▓▓▓ ▓▓▓▓ ▓▓▓▓▓▓▓ ▓▓▓▓</p>
+          <p class="verse locked">▓▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓</p>
+          <div class="scripture-bottom" id="scrollFoot">Печати удерживают слова во тьме.</div>
+        </div>
+        <div class="next"><strong id="nextTitle">Ожидание первой печати</strong><span id="nextText">Следующий фрагмент пока скрыт. Хранитель будет ждать ответа избранной.</span></div>
+      </section>
+    </div>
+    <footer class="footer"><div class="line"></div>Да направит Вас свет.<br>Хранитель последнего рассвета ☼</footer>
+  </main>
+  <script>
+    'use strict';
+    // This key must remain unchanged when adding the next three days.
+    const STORAGE_KEY = 'alisa_four_seals_v1';
+    const KEY = 'ТАЙНА';
+    const form = document.getElementById('answerForm');
+    const answer = document.getElementById('answer');
+    const feedback = document.getElementById('feedback');
+    const hints = [
+      'Вспомните, как выглядела бы надпись в зеркале. Попробуйте прочитать её справа налево.',
+      'После отражения получится «УБКОБ». Каждая буква сдвинута на одну вперёд в русском алфавите.',
+      'Верните буквы назад: У → Т, Б → А. Остальные три подчиняются тому же правилу.',
+      'Если испытание утомило Вас, хранитель подсказывает слово целиком: ТАЙНА. Печать не требует мучений.'
+    ];
+    let hintIndex = 0;
+    let finished = false;
+    const normalized = value => value.toLocaleUpperCase('ru-RU').replaceAll('Ё','Е').replace(/[^А-Я]/g,'');
+    function restore() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') } catch { return {} }
+    }
+    function save() {
+      try {
+        const state = restore();
+        state.seal1 = true;
+        state.key1 = KEY;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch { /* The page still works if browser storage is disabled. */ }
+    }
+    function complete(animate) {
+      if(finished) return;
+      finished=true;
+      document.getElementById('challenge').classList.add('hidden');
+      document.getElementById('result').classList.add('visible');
+      document.getElementById('altar').classList.add('bright');
+      const seal = document.getElementById('seal1');
+      seal.classList.remove('active'); seal.classList.add('completed');
+      const verse = document.getElementById('verse1');
+      verse.classList.remove('locked');verse.classList.add('revealed');
+      verse.textContent='Когда четвёртый луч завершит круг,';
+      document.getElementById('scrollFoot').textContent='Первая строка восстановлена. Остались три.';
+      document.getElementById('nextTitle').textContent='Вторая печать: 12 октября';
+      document.getElementById('nextText').textContent='Сегодня Вы сделали достаточно. Возвращайтесь после следующего послания хранителя.';
+      document.getElementById('progressLabel').textContent='25%';
+      document.getElementById('progressTrack').setAttribute('aria-valuenow','25');
+      const updateBar = () => document.getElementById('progressBar').style.width='25%';
+      if(animate){
+        const flash = document.getElementById('flash');
+        flash.classList.remove('play');void flash.offsetWidth;flash.classList.add('play');
+        window.setTimeout(updateBar,230);
+      } else updateBar();
+    }
+    form.addEventListener('submit',event=>{
+      event.preventDefault();
+      if(finished)return;
+      const value=normalized(answer.value);
+      if(!value){ feedback.textContent='Печать ожидает слово. Попробуйте вписать разгадку.';return; }
+      if(value!==KEY){
+        const responses=[
+          'Письмена дрогнули, но печать осталась цела. Попробуйте ещё раз.',
+          'Древний хранитель задумчиво поправил капюшон. Это пока не то слово.',
+          'Алтарь терпелив. При необходимости воспользуйтесь подсказкой.'
+        ];
+        feedback.textContent=responses[Math.floor(Math.random()*responses.length)];
+        answer.select();return;
+      }
+      save();complete(true);
+    });
+    document.getElementById('hintBtn').addEventListener('click',()=>{
+      const box=document.getElementById('hintText');
+      box.classList.remove('hidden');
+      box.textContent=hints[Math.min(hintIndex,hints.length-1)];
+      hintIndex++;
+      if(hintIndex>=hints.length)document.getElementById('hintBtn').classList.add('hidden');
+      else document.getElementById('hintBtn').textContent='Ещё одна подсказка';
+    });
+    if(restore().seal1 === true) complete(false);
+  </script>
+</body>
+</html>
